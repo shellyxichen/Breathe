@@ -1,0 +1,14 @@
+{
+  "id": "relax_478",
+  "displayName": "4-7-8 Relaxing Breath",
+  "loop": true,
+  "phases": [
+    { "type": "inhale", "durationSec": 4 },
+    { "type": "hold", "durationSec": 7 },
+    { "type": "exhale", "durationSec": 8 }
+  ],
+  "options": {
+    "ujjayiAvailable": false,
+    "ambientDefaultOn": false
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "box_8888",
+  "displayName": "Box Breathing (8-8-8-8)",
+  "loop": true,
+  "phases": [
+    { "type": "inhale", "durationSec": 8 },
+    { "type": "hold", "durationSec": 8 },
+    { "type": "exhale", "durationSec": 8 },
+    { "type": "hold", "durationSec": 8 }
+  ],
+  "options": {
+    "ujjayiAvailable": false,
+    "ambientDefaultOn": false
+  }
+}

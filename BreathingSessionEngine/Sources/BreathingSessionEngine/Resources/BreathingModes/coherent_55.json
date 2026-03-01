@@ -1,0 +1,13 @@
+{
+  "id": "coherent_55",
+  "displayName": "5-5 Coherent Breathing",
+  "loop": true,
+  "phases": [
+    { "type": "inhale", "durationSec": 5 },
+    { "type": "exhale", "durationSec": 5 }
+  ],
+  "options": {
+    "ujjayiAvailable": false,
+    "ambientDefaultOn": false
+  }
+}
