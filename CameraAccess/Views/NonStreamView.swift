@@ -69,14 +69,24 @@ struct NonStreamView: View {
         }
 
         if !sessionViewModel.isRunning && !isCountingDown, let desc = selectedMode.flatMap({ modeDescription($0) }) {
-          Text(desc)
-            .font(.system(.subheadline, design: .rounded))
-            .foregroundStyle(.white.opacity(0.6))
-            .multilineTextAlignment(.center)
-            .frame(maxWidth: .infinity)
-            .padding(.horizontal, 8)
-            .padding(.bottom, 36)
-            .transition(.opacity)
+          Group {
+            if let url = desc.url {
+              Link(destination: url) {
+                (Text(desc.text) + Text(" ") + Text(Image(systemName: "info.circle")))
+                  .foregroundStyle(.white.opacity(0.6))
+              }
+              .tint(.white.opacity(0.6))
+            } else {
+              Text(desc.text)
+                .foregroundStyle(.white.opacity(0.6))
+            }
+          }
+          .font(.system(.subheadline, design: .rounded))
+          .multilineTextAlignment(.center)
+          .frame(maxWidth: .infinity)
+          .padding(.horizontal, 8)
+          .padding(.bottom, 36)
+          .transition(.opacity)
         }
 
         Button {
@@ -226,9 +236,11 @@ struct NonStreamView: View {
     Task { @MainActor in
       for text in ["3", "2", "1"] {
         withAnimation(.easeInOut(duration: 0.2)) { countdownText = text }
+        sessionViewModel.playCountdownTick()
         try? await Task.sleep(nanoseconds: 1_000_000_000)
       }
       withAnimation(.easeInOut(duration: 0.2)) { countdownText = "Go" }
+      sessionViewModel.playCountdownGo()
       try? await Task.sleep(nanoseconds: 600_000_000)
       withAnimation(.easeInOut(duration: 0.2)) { countdownText = "" }
       isCountingDown = false
@@ -283,18 +295,27 @@ struct NonStreamView: View {
     .contentShape(Rectangle())
   }
 
-  private func modeDescription(_ mode: BreathingModeSpec) -> String? {
+  private func modeDescription(_ mode: BreathingModeSpec) -> (text: String, url: URL?)? {
     switch mode.id {
     case "box":
-      return "A steady, balanced rhythm to ground your attention."
+      return ("Equal inhale, hold, exhale, hold for 4 seconds — a steady rhythm to ground your attention.", nil)
     case "box_8888":
-      return "A slower, deeper version for sustained calm."
+      return ("Equal inhale, hold, exhale, hold for 8 seconds — a slower, deeper box breath for sustained calm.", nil)
     case "coherent_55":
-      return "A smooth, continuous breath with no pauses, supporting balance and heart-rate variability."
+      return (
+        "Inhale 5s, exhale 5s — a smooth, continuous breath with no pauses, supporting balance and heart rate variability.", 
+        URL(string: "https://www.nature.com/articles/s41598-023-49279-8")
+      )
     case "relax_478":
-      return "Longer exhales to gently quiet the nervous system, often used for rest and sleep."
+      return (
+        "Inhale 4s, hold 7s, exhale 8s — longer exhales to gently calm the mind and quiet the nervous system, by Dr. Andrew Weil.",
+        URL(string: "https://nursing.rutgers.edu/wp-content/uploads/2020/07/Dr.-Weil-4-7-8-Breathing-Exercise.pdf")
+      )
     case "physiological_sigh_326":
-      return "A double inhale followed by a long release, helping the body settle into rapid calm."
+      return (
+        "Double inhale 3s, hold 2s, long exhale 6s — a rapid breath to offload carbon dioxide, by Dr. Huberman.",
+        URL(string: "https://www.hubermanlab.com/newsletter/breathwork-protocols-for-health-focus-stress")
+      )
     default:
       return nil
     }
@@ -303,15 +324,15 @@ struct NonStreamView: View {
   private func modeMenuText(_ mode: BreathingModeSpec) -> String {
     switch mode.id {
     case "box":
-      return "4–4–4–4 · Box"
+      return "Box breathing"
     case "box_8888":
-      return "8–8–8–8 · Box"
+      return "Box breathing (deep)"
     case "coherent_55":
-      return "5–5 · Coherent"
+      return "Coherent breathing"
     case "relax_478":
-      return "4–7–8 · Relax"
+      return "Relax breathing"
     case "physiological_sigh_326":
-      return "3–1–2–6 · Sigh"
+      return "Physiological sigh"
     default:
       return mode.displayName
     }

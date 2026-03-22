@@ -22,6 +22,7 @@ enum BreathingTimerOption: String, CaseIterable, Identifiable {
   case sec180 = "180"
   case sec300 = "300"
   case sec600 = "600"
+  case sec900 = "900"
   case infinity = "infinity"
 
   var id: String { rawValue }
@@ -40,6 +41,8 @@ enum BreathingTimerOption: String, CaseIterable, Identifiable {
       return "05:00"
     case .sec600:
       return "10:00"
+    case .sec900:
+      return "15:00"
     case .infinity:
       return "Infinity"
     }
@@ -59,6 +62,8 @@ enum BreathingTimerOption: String, CaseIterable, Identifiable {
       return 300
     case .sec600:
       return 600
+    case .sec900:
+      return 900
     case .infinity:
       return nil
     }

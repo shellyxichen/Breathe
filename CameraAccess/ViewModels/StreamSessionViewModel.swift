@@ -82,6 +82,16 @@ final class SessionViewModel: NSObject, ObservableObject {
     startBeatTask()
   }
 
+  func playCountdownTick() {
+    cuePlayer.playCountdownTick()
+    hapticPlayer.playPhaseStart()
+  }
+
+  func playCountdownGo() {
+    cuePlayer.playCountdownTick()
+    hapticPlayer.playCountdownGo()
+  }
+
   func stop() {
     isRunning = false
     displayLink?.invalidate()
@@ -283,6 +293,7 @@ final class SessionViewModel: NSObject, ObservableObject {
 final class HapticCuePlayer {
   private let fallbackPhaseGenerator = UIImpactFeedbackGenerator(style: .heavy)
   private let fallbackBeatGenerator = UIImpactFeedbackGenerator(style: .rigid)
+  private let fallbackGoGenerator = UINotificationFeedbackGenerator()
 
   private let supportsCoreHaptics: Bool = CHHapticEngine.capabilitiesForHardware().supportsHaptics
   private var engine: CHHapticEngine?
@@ -291,6 +302,7 @@ final class HapticCuePlayer {
   func startIfNeeded() {
     fallbackPhaseGenerator.prepare()
     fallbackBeatGenerator.prepare()
+    fallbackGoGenerator.prepare()
     _ = ensureEngineStarted()
   }
 
@@ -320,6 +332,18 @@ final class HapticCuePlayer {
     fallbackBeatGenerator.prepare()
     fallbackBeatGenerator.impactOccurred(intensity: 0.65)
     fallbackBeatGenerator.prepare()
+  }
+
+  // Two short bursts with a clear gap between them — a quick pulse feel at "Go".
+  func playCountdownGo() {
+    if playCoreCountdownGo() { return }
+
+    fallbackPhaseGenerator.prepare()
+    fallbackPhaseGenerator.impactOccurred(intensity: 1.0)
+    Task { @MainActor [weak self] in
+      try? await Task.sleep(nanoseconds: 160_000_000)
+      self?.fallbackPhaseGenerator.impactOccurred(intensity: 0.85)
+    }
   }
 
   private func ensureEngineStarted() -> Bool {
@@ -414,6 +438,51 @@ final class HapticCuePlayer {
       return false
     }
   }
+
+  // Two short continuous bursts (0.12 s each) separated by a 0.16 s gap,
+  // creating a clear pulse-intermission-pulse feel at "Go".
+  private func playCoreCountdownGo() -> Bool {
+    guard ensureEngineStarted(), let engine else { return false }
+
+    if let phasePlayer {
+      try? phasePlayer.stop(atTime: CHHapticTimeImmediate)
+      self.phasePlayer = nil
+    }
+
+    let burst: Double = 0.12
+    let gap: Double = 0.16
+
+    let events: [CHHapticEvent] = [
+      CHHapticEvent(
+        eventType: .hapticContinuous,
+        parameters: [
+          CHHapticEventParameter(parameterID: .hapticIntensity, value: 1.0),
+          CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.60),
+        ],
+        relativeTime: 0,
+        duration: burst
+      ),
+      CHHapticEvent(
+        eventType: .hapticContinuous,
+        parameters: [
+          CHHapticEventParameter(parameterID: .hapticIntensity, value: 0.85),
+          CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.60),
+        ],
+        relativeTime: burst + gap,
+        duration: burst
+      ),
+    ]
+
+    do {
+      let pattern = try CHHapticPattern(events: events, parameters: [])
+      let player = try engine.makeAdvancedPlayer(with: pattern)
+      self.phasePlayer = player
+      try player.start(atTime: CHHapticTimeImmediate)
+      return true
+    } catch {
+      return false
+    }
+  }
 }
 
 final class AudioCuePlayer {
@@ -483,6 +552,38 @@ final class AudioCuePlayer {
         formant: formant * 0.85,
         breath: breath,
         accent: max(0, accent)
+      )
+
+      player.scheduleBuffer(buffer, at: nil, options: [], completionHandler: nil)
+      if !player.isPlaying {
+        player.play()
+      }
+    }
+  }
+
+  // Neutral soft chime for the 3-2-1 countdown. Uses the same synthesis
+  // pipeline as phase tones but at base pitch with no breathiness — no warm
+  // or cool character, just a clean reference click.
+  func playCountdownTick() {
+    queue.async {
+      self.startIfNeededLocked()
+      guard self.isStarted else { return }
+      guard let player = self.player, let format = self.renderFormat else { return }
+
+      let sampleRate = max(1, format.sampleRate)
+      let tickDuration: Double = 0.28
+      let frames = AVAudioFrameCount(sampleRate * tickDuration)
+
+      guard let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: frames) else { return }
+      buffer.frameLength = frames
+
+      self.renderPulse(
+        into: buffer,
+        sampleRate: sampleRate,
+        pitch: Config.basePitch,
+        formant: 880,
+        breath: 0.0,
+        accent: 0.65
       )
 
       player.scheduleBuffer(buffer, at: nil, options: [], completionHandler: nil)

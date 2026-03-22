@@ -19,8 +19,11 @@ import SwiftUI
 struct HomeScreenView: View {
   var onComplete: () -> Void = {}
 
+  @AppStorage("hasShownDefaultLandingThought") private var hasShownDefaultLandingThought: Bool = false
   @State private var isLineOneVisible: Bool = false
   @State private var isLineTwoVisible: Bool = false
+  @State private var displayedThought: LandingThought = .opening
+  @State private var appearTask: Task<Void, Never>?
 
   var body: some View {
     ZStack {
@@ -31,7 +34,7 @@ struct HomeScreenView: View {
         Spacer()
 
         VStack(spacing: 10) {
-          Text("What does it mean to 'do nothing'?")
+          Text(displayedThought.lineOne)
             .font(.system(size: 17, weight: .regular, design: .rounded))
             .foregroundStyle(.white.opacity(0.78))
             .multilineTextAlignment(.center)
@@ -39,7 +42,7 @@ struct HomeScreenView: View {
             .offset(y: isLineOneVisible ? 0 : 8)
             .animation(.easeInOut(duration: 1.1), value: isLineOneVisible)
 
-          Text("Just simply breathe.")
+          Text(displayedThought.lineTwo)
             .font(.system(size: 17, weight: .regular, design: .rounded))
             .foregroundStyle(.white.opacity(0.78))
             .multilineTextAlignment(.center)
@@ -79,16 +82,59 @@ struct HomeScreenView: View {
       .padding(.vertical, 32)
     }
     .onAppear {
+      displayedThought = nextLandingThought()
       isLineOneVisible = false
       isLineTwoVisible = false
-      Task { @MainActor in
+      appearTask?.cancel()
+      appearTask = Task { @MainActor in
         try? await Task.sleep(nanoseconds: 1_000_000_000)
+        guard !Task.isCancelled else { return }
         isLineOneVisible = true
         try? await Task.sleep(nanoseconds: 2_000_000_000)
+        guard !Task.isCancelled else { return }
         isLineTwoVisible = true
         try? await Task.sleep(nanoseconds: 2_000_000_000)
+        guard !Task.isCancelled else { return }
         onComplete()
       }
     }
+    .onDisappear {
+      appearTask?.cancel()
+      appearTask = nil
+    }
   }
+
+  private func nextLandingThought() -> LandingThought {
+    guard hasShownDefaultLandingThought else {
+      hasShownDefaultLandingThought = true
+      return .opening
+    }
+
+    return LandingThought.rotating.randomElement() ?? .opening
+  }
+}
+
+private struct LandingThought {
+  let lineOne: String
+  let lineTwo: String
+
+  static let opening = LandingThought(
+    lineOne: "What does it mean to 'do nothing'?",
+    lineTwo: "Just simply breathe."
+  )
+
+  static let rotating: [LandingThought] = [
+    LandingThought(
+      lineOne: "Let the breath stay with the nose.",
+      lineTwo: "A quieter path in can steady the mind."
+    ),
+    LandingThought(
+      lineOne: "Breathe a little slower than feels necessary.",
+      lineTwo: "Most people breathe too much; calm often begins with less."
+    ),
+    LandingThought(
+      lineOne: "Exhale completely, then wait for the inhale to return.",
+      lineTwo: "The next breath arrives more easily when it is not chased."
+    )
+  ]
 }

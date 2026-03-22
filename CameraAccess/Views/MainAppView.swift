@@ -20,7 +20,7 @@ struct MainAppView: View {
 
   @State private var modes: [BreathingModeSpec] = []
   @State private var selectedModeId: String = "box"
-  @State private var selectedTimerOption: BreathingTimerOption = .sec30
+  @State private var selectedTimerOption: BreathingTimerOption = .sec120
   @State private var modesLoadError: String?
 
   #if false // GLASSES_SDK: temporarily disabled
