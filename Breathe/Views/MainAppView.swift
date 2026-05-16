@@ -20,7 +20,6 @@ struct MainAppView: View {
 
   @State private var modes: [BreathingModeSpec] = []
   @State private var selectedModeId: String = "box"
-  @State private var selectedTimerOption: BreathingTimerOption = .sec120
   @State private var modesLoadError: String?
 
   #if false // GLASSES_SDK: temporarily disabled
@@ -36,10 +35,16 @@ struct MainAppView: View {
       sessionViewModel: sessionViewModel,
       modes: modes,
       selectedModeId: $selectedModeId,
-      selectedTimerOption: $selectedTimerOption,
       modesLoadError: modesLoadError
     )
     .task {
+      // Load mode catalog up front (fast — bundle JSON read), but defer cue
+      // priming until after the launch HomeScreen finishes. Initializing the
+      // AVAudioEngine + CHHapticEngine during the very first frame can race
+      // with iOS's launch transitions and leave the launch screen blank if
+      // the audio engine throws (debugger pauses on the exception → main
+      // thread can't render). StreamSessionView calls primeCues() once the
+      // HomeScreen intro completes.
       await loadModesIfNeeded()
     }
   }

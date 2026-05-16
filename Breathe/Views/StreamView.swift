@@ -42,7 +42,7 @@ struct StreamView: View {
           }
 
           Button {
-            viewModel.stop()
+            viewModel.stop(playFinishTone: true)
           } label: {
             Text("Stop")
               .font(.system(.body, design: .rounded).weight(.semibold))

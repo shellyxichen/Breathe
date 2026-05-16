@@ -7,18 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BEEF00000000000000000003 /* BreathingSessionEngine in Frameworks */ = {isa = PBXBuildFile; productRef = BEEF00000000000000000002 /* BreathingSessionEngine */; };
 		8F2D23802E856711002D0588 /* DebugMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2D237F2E856711002D0588 /* DebugMenuViewModel.swift */; };
 		8F8F00782E8ACB4600A4BDAF /* WearablesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8F00772E8ACB4500A4BDAF /* WearablesViewModel.swift */; };
-		8FD96B7F2E6F0A9800F56AB1 /* CameraAccessApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD96B792E6F0A9800F56AB1 /* CameraAccessApp.swift */; };
+		8FD96B7F2E6F0A9800F56AB1 /* BreatheApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD96B792E6F0A9800F56AB1 /* BreatheApp.swift */; };
 		8FD96B812E6F0A9800F56AB1 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD96B722E6F0A9800F56AB1 /* HomeScreenView.swift */; };
 		8FD96B872E6F0A9800F56AB1 /* StreamSessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD96B6F2E6F0A9800F56AB1 /* StreamSessionViewModel.swift */; };
 		8FD96B882E6F0A9800F56AB1 /* StreamSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD96B752E6F0A9800F56AB1 /* StreamSessionView.swift */; };
 		8FD96B8A2E6F0A9800F56AB1 /* PhotoPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD96B742E6F0A9800F56AB1 /* PhotoPreviewView.swift */; };
 		8FD96B8D2E6F0A9800F56AB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FD96B772E6F0A9800F56AB1 /* Assets.xcassets */; };
-		8FD96B952E6F0F7D00F56AB1 /* MWDATCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8FD96B942E6F0F7D00F56AB1 /* MWDATCore */; };
-		8FD96B952E6F0F7D00F56AB2 /* MWDATCamera in Frameworks */ = {isa = PBXBuildFile; productRef = 8FD96B942E6F0F7D00F56AB2 /* MWDATCamera */; };
-		8FD96B952E6F0F7D00F56AB3 /* MWDATMockDevice in Frameworks */ = {isa = PBXBuildFile; productRef = 8FD96B942E6F0F7D00F56AB3 /* MWDATMockDevice */; };
 		8FFD5FF52E8422580035E446 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFD5FF22E8422580035E446 /* CircleButton.swift */; };
 		8FFD5FF62E8422580035E446 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFD5FF32E8422580035E446 /* CustomButton.swift */; };
 		8FFD602C2E8433E20035E446 /* MockDeviceKitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFD60292E8433E20035E446 /* MockDeviceKitViewModel.swift */; };
@@ -29,24 +25,37 @@
 		8FFD60542E849D0D0035E446 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFD60532E849D0D0035E446 /* RegistrationView.swift */; };
 		8FFD60602E84A2F70035E446 /* MainAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFD605F2E84A2F70035E446 /* MainAppView.swift */; };
 		8FFD60612E84A2F70035E446 /* DebugMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFD605E2E84A2F70035E446 /* DebugMenuView.swift */; };
+		BA000000000000000000000C /* BreatheActivity.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BA0000000000000000000002 /* BreatheActivity.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BA0000000000000000000020 /* BreathingActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0000000000000000000010 /* BreathingActivityAttributes.swift */; };
+		BA0000000000000000000021 /* BreathingActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0000000000000000000010 /* BreathingActivityAttributes.swift */; };
+		BA0000000000000000000022 /* BreathingActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0000000000000000000011 /* BreathingActivityController.swift */; };
+		BA0000000000000000000023 /* BreatheActivityBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0000000000000000000012 /* BreatheActivityBundle.swift */; };
+		BA0000000000000000000024 /* BreatheLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0000000000000000000013 /* BreatheLiveActivity.swift */; };
+		BA0000000000000000000025 /* BreatheLiveActivityIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0000000000000000000015 /* BreatheLiveActivityIntents.swift */; };
+		BA0000000000000000000026 /* BreatheLiveActivityIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0000000000000000000015 /* BreatheLiveActivityIntents.swift */; };
+		BEEF00000000000000000003 /* BreathingSessionEngine in Frameworks */ = {isa = PBXBuildFile; productRef = BEEF00000000000000000002 /* BreathingSessionEngine */; };
 		E66D30242E7DA71900470B48 /* MockDeviceKitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66D30232E7DA71900470B48 /* MockDeviceKitButton.swift */; };
 		E6A188482EB918740097D0E1 /* StreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A188472EB918740097D0E1 /* StreamView.swift */; };
 		E6DA451D2E79A63100E3F688 /* MockDeviceCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DA45182E79A63100E3F688 /* MockDeviceCardView.swift */; };
 		E6DA451E2E79A63100E3F688 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DA45172E79A63100E3F688 /* CardView.swift */; };
 		E6DA451F2E79A63100E3F688 /* MockDeviceKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DA451A2E79A63100E3F688 /* MockDeviceKitView.swift */; };
 		E6FD3BCE2EB4D53A00E7FE5D /* NonStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FD3BCD2EB4D53A00E7FE5D /* NonStreamView.swift */; };
-		FAF85B362F32825200F29938 /* MWDATCamera in Frameworks */ = {isa = PBXBuildFile; productRef = FAF85B352F32825200F29938 /* MWDATCamera */; };
-		FAF85B382F32825200F29938 /* MWDATCore in Frameworks */ = {isa = PBXBuildFile; productRef = FAF85B372F32825200F29938 /* MWDATCore */; };
-		FAF85B3A2F32825200F29938 /* MWDATMockDevice in Frameworks */ = {isa = PBXBuildFile; productRef = FAF85B392F32825200F29938 /* MWDATMockDevice */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		BA0000000000000000000009 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CCCCCCCCCCCCCCCCCCCCCC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BA0000000000000000000001;
+			remoteInfo = BreatheActivity;
+		};
 		E699CC992E8150670052C240 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CCCCCCCCCCCCCCCCCCCCCC /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8A8A8A8A8A8A8A8A8A8A8A8A;
-			remoteInfo = CameraAccess;
+			remoteInfo = Breathe;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -61,10 +70,21 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BA000000000000000000000B /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				BA000000000000000000000C /* BreatheActivity.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3A3A3A3A3A3A3A3A3A3A3A3A /* CameraAccess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CameraAccess.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A3A3A3A3A3A3A3A3A3A3A3A /* Breathe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Breathe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F2D237F2E856711002D0588 /* DebugMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMenuViewModel.swift; sourceTree = "<group>"; };
 		8F8F00772E8ACB4500A4BDAF /* WearablesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WearablesViewModel.swift; sourceTree = "<group>"; };
 		8FD96B6F2E6F0A9800F56AB1 /* StreamSessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamSessionViewModel.swift; sourceTree = "<group>"; };
@@ -72,8 +92,8 @@
 		8FD96B742E6F0A9800F56AB1 /* PhotoPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPreviewView.swift; sourceTree = "<group>"; };
 		8FD96B752E6F0A9800F56AB1 /* StreamSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamSessionView.swift; sourceTree = "<group>"; };
 		8FD96B772E6F0A9800F56AB1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8FD96B782E6F0A9800F56AB1 /* CameraAccess.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CameraAccess.entitlements; sourceTree = "<group>"; };
-		8FD96B792E6F0A9800F56AB1 /* CameraAccessApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraAccessApp.swift; sourceTree = "<group>"; };
+		8FD96B782E6F0A9800F56AB1 /* Breathe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Breathe.entitlements; sourceTree = "<group>"; };
+		8FD96B792E6F0A9800F56AB1 /* BreatheApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreatheApp.swift; sourceTree = "<group>"; };
 		8FD96B7B2E6F0A9800F56AB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8FFD5FF22E8422580035E446 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		8FFD5FF32E8422580035E446 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -85,8 +105,15 @@
 		8FFD60532E849D0D0035E446 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		8FFD605E2E84A2F70035E446 /* DebugMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMenuView.swift; sourceTree = "<group>"; };
 		8FFD605F2E84A2F70035E446 /* MainAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppView.swift; sourceTree = "<group>"; };
+		BA0000000000000000000002 /* BreatheActivity.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BreatheActivity.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA0000000000000000000010 /* BreathingActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathingActivityAttributes.swift; sourceTree = "<group>"; };
+		BA0000000000000000000011 /* BreathingActivityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathingActivityController.swift; sourceTree = "<group>"; };
+		BA0000000000000000000012 /* BreatheActivityBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreatheActivityBundle.swift; sourceTree = "<group>"; };
+		BA0000000000000000000013 /* BreatheLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreatheLiveActivity.swift; sourceTree = "<group>"; };
+		BA0000000000000000000014 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA0000000000000000000015 /* BreatheLiveActivityIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreatheLiveActivityIntents.swift; sourceTree = "<group>"; };
 		E66D30232E7DA71900470B48 /* MockDeviceKitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDeviceKitButton.swift; sourceTree = "<group>"; };
-		E699CC952E8150670052C240 /* CameraAccessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CameraAccessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E699CC952E8150670052C240 /* BreatheTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BreatheTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6A188472EB918740097D0E1 /* StreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamView.swift; sourceTree = "<group>"; };
 		E6DA45172E79A63100E3F688 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		E6DA45182E79A63100E3F688 /* MockDeviceCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDeviceCardView.swift; sourceTree = "<group>"; };
@@ -95,7 +122,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		E699CC962E8150670052C240 /* CameraAccessTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CameraAccessTests; sourceTree = "<group>"; };
+		E699CC962E8150670052C240 /* BreatheTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = BreatheTests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,12 +131,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEEF00000000000000000003 /* BreathingSessionEngine in Frameworks */,
-				8FD96B952E6F0F7D00F56AB1 /* MWDATCore in Frameworks */,
-				FAF85B362F32825200F29938 /* MWDATCamera in Frameworks */,
-				8FD96B952E6F0F7D00F56AB2 /* MWDATCamera in Frameworks */,
-				FAF85B382F32825200F29938 /* MWDATCore in Frameworks */,
-				FAF85B3A2F32825200F29938 /* MWDATMockDevice in Frameworks */,
-				8FD96B952E6F0F7D00F56AB3 /* MWDATMockDevice in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA0000000000000000000004 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,18 +147,20 @@
 		5A5A5A5A5A5A5A5A5A5A5A5A = {
 			isa = PBXGroup;
 			children = (
-				8FD96B7D2E6F0A9800F56AB1 /* CameraAccess */,
+				8FD96B7D2E6F0A9800F56AB1 /* Breathe */,
+				BA000000000000000000000D /* BreatheActivity */,
 				8F2A14F12DDBCEB900D4E5F2 /* Frameworks */,
 				7A7A7A7A7A7A7A7A7A7A7A7A /* Products */,
-				E699CC962E8150670052C240 /* CameraAccessTests */,
+				E699CC962E8150670052C240 /* BreatheTests */,
 			);
 			sourceTree = "<group>";
 		};
 		7A7A7A7A7A7A7A7A7A7A7A7A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3A3A3A3A3A3A3A3A3A3A3A3A /* CameraAccess.app */,
-				E699CC952E8150670052C240 /* CameraAccessTests.xctest */,
+				3A3A3A3A3A3A3A3A3A3A3A3A /* Breathe.app */,
+				E699CC952E8150670052C240 /* BreatheTests.xctest */,
+				BA0000000000000000000002 /* BreatheActivity.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,6 +179,7 @@
 				8F2D237F2E856711002D0588 /* DebugMenuViewModel.swift */,
 				8FD96B6F2E6F0A9800F56AB1 /* StreamSessionViewModel.swift */,
 				8F8F00772E8ACB4500A4BDAF /* WearablesViewModel.swift */,
+				BA0000000000000000000011 /* BreathingActivityController.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -170,18 +201,19 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		8FD96B7D2E6F0A9800F56AB1 /* CameraAccess */ = {
+		8FD96B7D2E6F0A9800F56AB1 /* Breathe */ = {
 			isa = PBXGroup;
 			children = (
 				8FD96B702E6F0A9800F56AB1 /* ViewModels */,
 				8FD96B762E6F0A9800F56AB1 /* Views */,
+				BA000000000000000000000E /* Shared */,
 				8FFD5FF82E8422B60035E446 /* Utils */,
 				8FD96B772E6F0A9800F56AB1 /* Assets.xcassets */,
-				8FD96B782E6F0A9800F56AB1 /* CameraAccess.entitlements */,
-				8FD96B792E6F0A9800F56AB1 /* CameraAccessApp.swift */,
+				8FD96B782E6F0A9800F56AB1 /* Breathe.entitlements */,
+				8FD96B792E6F0A9800F56AB1 /* BreatheApp.swift */,
 				8FD96B7B2E6F0A9800F56AB1 /* Info.plist */,
 			);
-			path = CameraAccess;
+			path = Breathe;
 			sourceTree = "<group>";
 		};
 		8FFD5FF42E8422580035E446 /* Components */ = {
@@ -213,6 +245,25 @@
 			path = MockDeviceKit;
 			sourceTree = "<group>";
 		};
+		BA000000000000000000000D /* BreatheActivity */ = {
+			isa = PBXGroup;
+			children = (
+				BA0000000000000000000012 /* BreatheActivityBundle.swift */,
+				BA0000000000000000000013 /* BreatheLiveActivity.swift */,
+				BA0000000000000000000014 /* Info.plist */,
+			);
+			path = BreatheActivity;
+			sourceTree = "<group>";
+		};
+		BA000000000000000000000E /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				BA0000000000000000000010 /* BreathingActivityAttributes.swift */,
+				BA0000000000000000000015 /* BreatheLiveActivityIntents.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		E6DA451B2E79A63100E3F688 /* MockDeviceKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -226,27 +277,49 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8A8A8A8A8A8A8A8A8A8A8A8A /* CameraAccess */ = {
+		8A8A8A8A8A8A8A8A8A8A8A8A /* Breathe */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9A9A9A9A9A9A9A9A9A9A9A9A /* Build configuration list for PBXNativeTarget "CameraAccess" */;
+			buildConfigurationList = 9A9A9A9A9A9A9A9A9A9A9A9A /* Build configuration list for PBXNativeTarget "Breathe" */;
 			buildPhases = (
 				AAAAAAAAAAAAAAAAAAAAAA /* Sources */,
 				4A4A4A4A4A4A4A4A4A4A4A4A /* Frameworks */,
 				BBBBBBBBBBBBBBBBBBBBBB /* Resources */,
 				8FD96B932E6F0C6E00F56AB1 /* Embed Frameworks */,
+				BA000000000000000000000B /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BA000000000000000000000A /* PBXTargetDependency */,
+			);
+			name = Breathe;
+			packageProductDependencies = (
+				BEEF00000000000000000002 /* BreathingSessionEngine */,
+			);
+			productName = Breathe;
+			productReference = 3A3A3A3A3A3A3A3A3A3A3A3A /* Breathe.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BA0000000000000000000001 /* BreatheActivity */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BA0000000000000000000006 /* Build configuration list for PBXNativeTarget "BreatheActivity" */;
+			buildPhases = (
+				BA0000000000000000000003 /* Sources */,
+				BA0000000000000000000004 /* Frameworks */,
+				BA0000000000000000000005 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = CameraAccess;
-			productName = CameraAccess;
-			productReference = 3A3A3A3A3A3A3A3A3A3A3A3A /* CameraAccess.app */;
-			productType = "com.apple.product-type.application";
+			name = BreatheActivity;
+			productName = BreatheActivity;
+			productReference = BA0000000000000000000002 /* BreatheActivity.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
-		E699CC942E8150670052C240 /* CameraAccessTests */ = {
+		E699CC942E8150670052C240 /* BreatheTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E699CC9D2E8150670052C240 /* Build configuration list for PBXNativeTarget "CameraAccessTests" */;
+			buildConfigurationList = E699CC9D2E8150670052C240 /* Build configuration list for PBXNativeTarget "BreatheTests" */;
 			buildPhases = (
 				E699CC912E8150670052C240 /* Sources */,
 				E699CC932E8150670052C240 /* Resources */,
@@ -257,16 +330,16 @@
 				E699CC9A2E8150670052C240 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				E699CC962E8150670052C240 /* CameraAccessTests */,
+				E699CC962E8150670052C240 /* BreatheTests */,
 			);
-			name = CameraAccessTests;
+			name = BreatheTests;
 			packageProductDependencies = (
 				FAF85B3B2F32832200F29938 /* MWDATCamera */,
 				FAF85B3C2F32832200F29938 /* MWDATCore */,
 				FAF85B3D2F32832200F29938 /* MWDATMockDevice */,
 			);
-			productName = CameraAccessTests;
-			productReference = E699CC952E8150670052C240 /* CameraAccessTests.xctest */;
+			productName = BreatheTests;
+			productReference = E699CC952E8150670052C240 /* BreatheTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -275,11 +348,15 @@
 		CCCCCCCCCCCCCCCCCCCCCC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 2600;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 2620;
 				TargetAttributes = {
 					8A8A8A8A8A8A8A8A8A8A8A8A = {
 						CreatedOnToolsVersion = 12.5;
+					};
+					BA0000000000000000000001 = {
+						CreatedOnToolsVersion = 26.0;
 					};
 					E699CC942E8150670052C240 = {
 						CreatedOnToolsVersion = 26.0;
@@ -287,7 +364,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DDDDDDDDDDDDDDDDDDDDDD /* Build configuration list for PBXProject "CameraAccess" */;
+			buildConfigurationList = DDDDDDDDDDDDDDDDDDDDDD /* Build configuration list for PBXProject "Breathe" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -304,13 +381,21 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8A8A8A8A8A8A8A8A8A8A8A8A /* CameraAccess */,
-				E699CC942E8150670052C240 /* CameraAccessTests */,
+				8A8A8A8A8A8A8A8A8A8A8A8A /* Breathe */,
+				BA0000000000000000000001 /* BreatheActivity */,
+				E699CC942E8150670052C240 /* BreatheTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BA0000000000000000000005 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BBBBBBBBBBBBBBBBBBBBBB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -333,7 +418,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8FD96B7F2E6F0A9800F56AB1 /* CameraAccessApp.swift in Sources */,
+				8FD96B7F2E6F0A9800F56AB1 /* BreatheApp.swift in Sources */,
 				8FD96B812E6F0A9800F56AB1 /* HomeScreenView.swift in Sources */,
 				8F2D23802E856711002D0588 /* DebugMenuViewModel.swift in Sources */,
 				8FFD60542E849D0D0035E446 /* RegistrationView.swift in Sources */,
@@ -356,6 +441,20 @@
 				8FFD5FF52E8422580035E446 /* CircleButton.swift in Sources */,
 				8FFD5FF62E8422580035E446 /* CustomButton.swift in Sources */,
 				E6FD3BCE2EB4D53A00E7FE5D /* NonStreamView.swift in Sources */,
+				BA0000000000000000000020 /* BreathingActivityAttributes.swift in Sources */,
+				BA0000000000000000000022 /* BreathingActivityController.swift in Sources */,
+				BA0000000000000000000025 /* BreatheLiveActivityIntents.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA0000000000000000000003 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA0000000000000000000023 /* BreatheActivityBundle.swift in Sources */,
+				BA0000000000000000000024 /* BreatheLiveActivity.swift in Sources */,
+				BA0000000000000000000021 /* BreathingActivityAttributes.swift in Sources */,
+				BA0000000000000000000026 /* BreatheLiveActivityIntents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,9 +468,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		BA000000000000000000000A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BA0000000000000000000001 /* BreatheActivity */;
+			targetProxy = BA0000000000000000000009 /* PBXContainerItemProxy */;
+		};
 		E699CC9A2E8150670052C240 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8A8A8A8A8A8A8A8A8A8A8A8A /* CameraAccess */;
+			target = 8A8A8A8A8A8A8A8A8A8A8A8A /* Breathe */;
 			targetProxy = E699CC992E8150670052C240 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -383,7 +487,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = CameraAccess/CameraAccess.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Breathe/Breathe.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -391,7 +495,7 @@
 				DEVELOPMENT_TEAM = FS7HER3SLN;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
-				INFOPLIST_FILE = CameraAccess/Info.plist;
+				INFOPLIST_FILE = Breathe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -412,14 +516,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = CameraAccess/CameraAccess.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Breathe/Breathe.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = FS7HER3SLN;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = CameraAccess/Info.plist;
+				INFOPLIST_FILE = Breathe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -429,6 +533,64 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shellyxchen.Breathe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BA0000000000000000000007 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NY383CYV6H;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = BreatheActivity/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Breathe Activity";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shellyxchen.Breathe.BreatheActivity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BA0000000000000000000008 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NY383CYV6H;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = BreatheActivity/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Breathe Activity";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shellyxchen.Breathe.BreatheActivity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -448,7 +610,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.meta.wearables.external.CameraAccessTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.meta.wearables.external.BreatheTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -459,7 +621,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CameraAccess.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CameraAccess";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Breathe.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Breathe";
 			};
 			name = Debug;
 		};
@@ -477,7 +639,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.meta.wearables.external.CameraAccessTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.meta.wearables.external.BreatheTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -487,7 +649,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CameraAccess.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CameraAccess";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Breathe.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Breathe";
 			};
 			name = Release;
 		};
@@ -547,6 +709,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -601,6 +764,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
@@ -610,7 +774,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9A9A9A9A9A9A9A9A9A9A9A9A /* Build configuration list for PBXNativeTarget "CameraAccess" */ = {
+		9A9A9A9A9A9A9A9A9A9A9A9A /* Build configuration list for PBXNativeTarget "Breathe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0B0B0B0B0B0B0B0B0B0B0B0B /* Debug */,
@@ -619,7 +783,16 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DDDDDDDDDDDDDDDDDDDDDD /* Build configuration list for PBXProject "CameraAccess" */ = {
+		BA0000000000000000000006 /* Build configuration list for PBXNativeTarget "BreatheActivity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BA0000000000000000000007 /* Debug */,
+				BA0000000000000000000008 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DDDDDDDDDDDDDDDDDDDDDD /* Build configuration list for PBXProject "Breathe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EEEEEEEEEEEEEEEEEEEEEE /* Debug */,
@@ -628,7 +801,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E699CC9D2E8150670052C240 /* Build configuration list for PBXNativeTarget "CameraAccessTests" */ = {
+		E699CC9D2E8150670052C240 /* Build configuration list for PBXNativeTarget "BreatheTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E699CC9B2E8150670052C240 /* Debug */,
@@ -662,36 +835,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BEEF00000000000000000001 /* XCLocalSwiftPackageReference "BreathingSessionEngine" */;
 			productName = BreathingSessionEngine;
-		};
-		8FD96B942E6F0F7D00F56AB1 /* MWDATCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 95F7F3332DEF0D91006D1C1A /* XCRemoteSwiftPackageReference "meta-wearables-dat-ios" */;
-			productName = MWDATCore;
-		};
-		8FD96B942E6F0F7D00F56AB2 /* MWDATCamera */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 95F7F3332DEF0D91006D1C1A /* XCRemoteSwiftPackageReference "meta-wearables-dat-ios" */;
-			productName = MWDATCamera;
-		};
-		8FD96B942E6F0F7D00F56AB3 /* MWDATMockDevice */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 95F7F3332DEF0D91006D1C1A /* XCRemoteSwiftPackageReference "meta-wearables-dat-ios" */;
-			productName = MWDATMockDevice;
-		};
-		FAF85B352F32825200F29938 /* MWDATCamera */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 95F7F3332DEF0D91006D1C1A /* XCRemoteSwiftPackageReference "meta-wearables-dat-ios" */;
-			productName = MWDATCamera;
-		};
-		FAF85B372F32825200F29938 /* MWDATCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 95F7F3332DEF0D91006D1C1A /* XCRemoteSwiftPackageReference "meta-wearables-dat-ios" */;
-			productName = MWDATCore;
-		};
-		FAF85B392F32825200F29938 /* MWDATMockDevice */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 95F7F3332DEF0D91006D1C1A /* XCRemoteSwiftPackageReference "meta-wearables-dat-ios" */;
-			productName = MWDATMockDevice;
 		};
 		FAF85B3B2F32832200F29938 /* MWDATCamera */ = {
 			isa = XCSwiftPackageProductDependency;

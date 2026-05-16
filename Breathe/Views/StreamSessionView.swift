@@ -18,7 +18,6 @@ struct StreamSessionView: View {
   @ObservedObject var sessionViewModel: SessionViewModel
   let modes: [BreathingModeSpec]
   @Binding var selectedModeId: String
-  @Binding var selectedTimerOption: BreathingTimerOption
   let modesLoadError: String?
 
   @State private var showLauncher = true
@@ -27,13 +26,11 @@ struct StreamSessionView: View {
     sessionViewModel: SessionViewModel,
     modes: [BreathingModeSpec],
     selectedModeId: Binding<String>,
-    selectedTimerOption: Binding<BreathingTimerOption>,
     modesLoadError: String?
   ) {
     self.sessionViewModel = sessionViewModel
     self.modes = modes
     self._selectedModeId = selectedModeId
-    self._selectedTimerOption = selectedTimerOption
     self.modesLoadError = modesLoadError
   }
 
@@ -43,15 +40,21 @@ struct StreamSessionView: View {
         sessionViewModel: sessionViewModel,
         modes: modes,
         selectedModeId: $selectedModeId,
-        selectedTimerOption: $selectedTimerOption,
         modesLoadError: modesLoadError
       )
 
       if showLauncher {
         HomeScreenView {
-          withAnimation(.easeInOut(duration: 1)) {
+          // Prime cues once the launcher hands off — keeps the audio +
+          // haptic engine init off the very first launch frame so any
+          // exception breakpoint can't pause a not-yet-rendered window.
+          sessionViewModel.primeCues()
+          withAnimation(.easeInOut(duration: 1.0)) {
             showLauncher = false
           }
+        }
+        .onAppear {
+          sessionViewModel.beginWelcomeAmbient()
         }
         .transition(.opacity)
         .zIndex(1)

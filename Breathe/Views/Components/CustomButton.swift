@@ -9,7 +9,7 @@
 //
 // CustomButton.swift
 //
-// Reusable button component used throughout the CameraAccess app for consistent styling.
+// Reusable button component used throughout the Breathe app for consistent styling.
 //
 
 import SwiftUI
