@@ -97,31 +97,24 @@ struct NonStreamView: View {
         }
 
         if let mode = selectedMode {
-          VStack(spacing: 8) {
+          VStack(spacing: 6) {
             Text(modeSubtitle(mode))
-              .font(.system(size: 16, weight: .medium, design: .rounded))
+              .font(.system(.subheadline, design: .rounded).weight(.medium))
               .foregroundStyle(.white.opacity(0.7))
               .multilineTextAlignment(.center)
+              .contentTransition(.opacity)
 
             if let desc = modeDescription(mode) {
-              Group {
-                if let url = desc.url {
-                  Link(destination: url) {
-                    (Text(desc.text) + Text(" ") + Text(Image(systemName: "info.circle")))
-                      .foregroundStyle(.white.opacity(0.45))
-                  }
-                  .tint(.white.opacity(0.45))
-                } else {
-                  Text(desc.text)
-                    .foregroundStyle(.white.opacity(0.45))
-                }
-              }
-                .font(.system(size: 13, weight: .regular, design: .rounded))
+              Text(desc)
+                .font(.system(.caption2, design: .rounded))
+                .foregroundStyle(.white.opacity(0.45))
                 .multilineTextAlignment(.center)
-                .fixedSize(horizontal: false, vertical: true)
+                .padding(.horizontal, 24)
+                .contentTransition(.opacity)
             }
           }
           .frame(maxWidth: .infinity)
+          .padding(.horizontal, 8)
           .opacity(modeTextOpacity)
         }
 
@@ -449,27 +442,18 @@ struct NonStreamView: View {
     }
   }
 
-  private func modeDescription(_ mode: BreathingModeSpec) -> (text: String, url: URL?)? {
+  private func modeDescription(_ mode: BreathingModeSpec) -> String? {
     switch mode.id {
     case "box":
-      return ("Equal inhale, hold, exhale, hold for 4 seconds — a steady rhythm to ground your attention.", nil)
+      return "A steady, balanced rhythm to ground your attention."
     case "box_8888":
-      return ("Equal inhale, hold, exhale, hold for 8 seconds — a slower, deeper box breath for sustained calm.", nil)
+      return "A slower, deeper version for sustained calm."
     case "coherent_55":
-      return (
-        "Inhale 5s, exhale 5s — a smooth, continuous breath with no pauses, supporting balance and heart rate variability.",
-        URL(string: "https://www.nature.com/articles/s41598-023-49279-8")
-      )
+      return "A smooth, continuous breath with no pauses, supporting balance and heart-rate variability."
     case "relax_478":
-      return (
-        "Inhale 4s, hold 7s, exhale 8s — longer exhales to gently calm the mind and quiet the nervous system, by Dr. Andrew Weil.",
-        URL(string: "https://nursing.rutgers.edu/wp-content/uploads/2020/07/Dr.-Weil-4-7-8-Breathing-Exercise.pdf")
-      )
+      return "Longer exhales to gently quiet the nervous system, often used for rest and sleep."
     case "physiological_sigh_326":
-      return (
-        "Double inhale 3s, hold 2s, long exhale 6s — a rapid breath to offload carbon dioxide, by Dr. Huberman.",
-        URL(string: "https://www.hubermanlab.com/newsletter/breathwork-protocols-for-health-focus-stress")
-      )
+      return "A double inhale followed by a long release, helping the body settle into rapid calm."
     default:
       return nil
     }

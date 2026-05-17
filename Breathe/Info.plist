@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Breath</string>
+	<string>Just Breathe</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Breath</string>
+	<string>Just Breathe</string>
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
@@ -33,27 +33,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<!-- GLASSES_SDK: temporarily disabled — re-enable LSApplicationQueriesSchemes,
-	     MWDAT config dict, and NSBluetoothAlwaysUsageDescription when the Meta
-	     Wearables SDK is re-integrated (BreatheApp.swift Wearables.configure()).
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>fb-viewapp</string>
-	</array>
-	<key>MWDAT</key>
-	<dict>
-		<key>AppLinkURLScheme</key>
-		<string>breathe://</string>
-		<key>ClientToken</key>
-		<string>$(CLIENT_TOKEN)</string>
-		<key>MetaAppID</key>
-		<string>$(META_APP_ID)</string>
-		<key>TeamID</key>
-		<string>$(DEVELOPMENT_TEAM)</string>
-	</dict>
-	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>Needed to connect to Meta AI Glasses</string>
-	-->
 	<key>NSSupportsLiveActivities</key>
 	<true/>
 	<key>NSSupportsLiveActivitiesFrequentUpdates</key>
@@ -67,14 +46,6 @@
 	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
-		<!-- GLASSES_SDK: temporarily disabled — re-enable when re-integrating
-		     the Meta Wearables SDK. These declared background modes trigger
-		     iOS to initialize external-accessory / Bluetooth scanning at app
-		     launch even when our code doesn't use them, adding seconds to
-		     cold-start time.
-		<string>bluetooth-peripheral</string>
-		<string>external-accessory</string>
-		-->
 		<string>audio</string>
 	</array>
 	<key>UILaunchScreen</key>
@@ -86,15 +57,6 @@
 	<array>
 		<string>armv7</string>
 	</array>
-	<!-- GLASSES_SDK: temporarily disabled — re-enable when re-integrating
-	     the Meta Wearables SDK. Declaring this MFi protocol causes iOS to
-	     do an accessory discovery scan at launch that can hang for many
-	     seconds when no matching accessory is connected.
-	<key>UISupportedExternalAccessoryProtocols</key>
-	<array>
-		<string>com.meta.ar.wearable</string>
-	</array>
-	-->
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

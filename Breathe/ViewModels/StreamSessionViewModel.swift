@@ -837,6 +837,37 @@ final class AudioCuePlayer {
     }
   }
 
+  enum NatureSource: String, CaseIterable {
+    case ocean
+    case forest
+    case water
+
+    var isFileBacked: Bool {
+      switch self {
+      case .forest, .water:
+        return true
+      case .ocean:
+        return false
+      }
+    }
+
+    var resourceName: String? {
+      switch self {
+      case .forest:
+        return "forest"
+      case .water:
+        return "water"
+      case .ocean:
+        return nil
+      }
+    }
+
+    var resourceExtension: String? {
+      guard isFileBacked else { return nil }
+      return "m4a"
+    }
+  }
+
   struct Config {
     static let basePitch: Double = 220
     static let pulsesPerSecond: Double = 1
@@ -856,16 +887,16 @@ final class AudioCuePlayer {
     static let natureMinimumLoopSec: Double = 24.0
     static let natureSwellCyclesPerLoop: Double = 2.0
     static let natureVolume: Double = 0.60
-    static let natureSessionVolume: Double = 0.36
+    static let natureSessionVolume: Double = 0.20
     static let natureFadeInDelaySec: Double = 0.12
     static let natureFadeInSec: Double = 2.6
     static let natureDuckSec: Double = 1.8
     static let natureRenderWarmupSec: Double = 0.18
     static let natureSeamBlendSec: Double = 1.2
-    // Temporarily hide the ocean bed without deleting the synth path.
-    static let enableNatureOcean: Bool = false
-    static let enableNatureRain: Bool = false
-    static var enableNatureLayer: Bool { enableNatureOcean || enableNatureRain }
+    // Mirror the website ambience behavior: prefer bundled files and keep the
+    // synthesized ocean bed as the final fallback.
+    static let natureSources: [NatureSource] = [.forest, .water, .ocean]
+    static var enableNatureLayer: Bool { !natureSources.isEmpty }
     // Quick A/B switch: .gentle, .balanced, .deep
     static let oceanPreset: OceanPreset = .gentle
   }
@@ -885,6 +916,7 @@ final class AudioCuePlayer {
   private var isStarted: Bool = false
   private var configChangeObserver: NSObjectProtocol?
   private var natureVolumeRampToken: Int = 0
+  private var selectedNatureSource: NatureSource?
 
   func startIfNeeded() {
     queue.async {
@@ -1369,8 +1401,139 @@ final class AudioCuePlayer {
   }
 
   private func makeNatureLoopBuffer(sampleRate: Double, format: AVAudioFormat) -> AVAudioPCMBuffer? {
-    guard Config.enableNatureOcean || Config.enableNatureRain else { return nil }
-    let preset = Config.oceanPreset
+    guard Config.enableNatureLayer else { return nil }
+
+    for source in natureSourceCandidatesLocked() {
+      if let buffer = makeNatureLoopBuffer(sampleRate: sampleRate, format: format, source: source) {
+        selectedNatureSource = source
+        return buffer
+      }
+      #if DEBUG
+      if source.isFileBacked {
+        NSLog("[Breathe] Unable to load ambient source \(source.rawValue) — falling back.")
+      }
+      #endif
+    }
+
+    selectedNatureSource = .ocean
+    return makeSynthNatureLoopBuffer(sampleRate: sampleRate, format: format, preset: Config.oceanPreset)
+  }
+
+  private func natureSourceCandidatesLocked() -> [NatureSource] {
+    if let selectedNatureSource {
+      let remaining = Config.natureSources.filter { $0 != selectedNatureSource }
+      return [selectedNatureSource] + remaining
+    }
+    return Config.natureSources.shuffled()
+  }
+
+  private func makeNatureLoopBuffer(
+    sampleRate: Double,
+    format: AVAudioFormat,
+    source: NatureSource
+  ) -> AVAudioPCMBuffer? {
+    switch source {
+    case .ocean:
+      return makeSynthNatureLoopBuffer(sampleRate: sampleRate, format: format, preset: Config.oceanPreset)
+    case .forest, .water:
+      return loadBundledNatureLoopBuffer(source: source, outputFormat: format)
+    }
+  }
+
+  private func loadBundledNatureLoopBuffer(
+    source: NatureSource,
+    outputFormat: AVAudioFormat
+  ) -> AVAudioPCMBuffer? {
+    guard
+      let resourceName = source.resourceName,
+      let resourceExtension = source.resourceExtension,
+      let url = Bundle.main.url(forResource: resourceName, withExtension: resourceExtension)
+    else {
+      return nil
+    }
+
+    do {
+      let file = try AVAudioFile(forReading: url)
+      let inputFormat = file.processingFormat
+      let inputFrameCapacity = AVAudioFrameCount(
+        min(Int64(UInt32.max), max(Int64(1), file.length))
+      )
+      guard let inputBuffer = AVAudioPCMBuffer(
+        pcmFormat: inputFormat,
+        frameCapacity: inputFrameCapacity
+      )
+      else {
+        return nil
+      }
+      try file.read(into: inputBuffer)
+      return convertNatureBuffer(inputBuffer, to: outputFormat)
+    } catch {
+      #if DEBUG
+      NSLog("[Breathe] Failed to decode ambient source \(source.rawValue): \(error.localizedDescription)")
+      #endif
+      return nil
+    }
+  }
+
+  private func convertNatureBuffer(
+    _ inputBuffer: AVAudioPCMBuffer,
+    to outputFormat: AVAudioFormat
+  ) -> AVAudioPCMBuffer? {
+    let inputFormat = inputBuffer.format
+    if inputFormat.sampleRate == outputFormat.sampleRate,
+      inputFormat.channelCount == outputFormat.channelCount,
+      inputFormat.commonFormat == outputFormat.commonFormat,
+      inputFormat.isInterleaved == outputFormat.isInterleaved
+    {
+      return inputBuffer
+    }
+
+    guard let converter = AVAudioConverter(from: inputFormat, to: outputFormat) else {
+      return nil
+    }
+
+    let sampleRateRatio = outputFormat.sampleRate / max(1, inputFormat.sampleRate)
+    let outputFrameCapacity = AVAudioFrameCount(
+      max(1, Int(ceil(Double(inputBuffer.frameLength) * sampleRateRatio) + 1024))
+    )
+    guard let outputBuffer = AVAudioPCMBuffer(
+      pcmFormat: outputFormat,
+      frameCapacity: outputFrameCapacity
+    )
+    else {
+      return nil
+    }
+
+    var didProvideInput = false
+    var conversionError: NSError?
+    let status = converter.convert(to: outputBuffer, error: &conversionError) { _, outStatus in
+      if didProvideInput {
+        outStatus.pointee = .endOfStream
+        return nil
+      }
+      didProvideInput = true
+      outStatus.pointee = .haveData
+      return inputBuffer
+    }
+
+    if let conversionError {
+      #if DEBUG
+      NSLog("[Breathe] Failed to convert ambient buffer: \(conversionError.localizedDescription)")
+      #endif
+      return nil
+    }
+
+    guard status == .haveData || status == .inputRanDry || status == .endOfStream else {
+      return nil
+    }
+    return outputBuffer
+  }
+
+  private func makeSynthNatureLoopBuffer(
+    sampleRate: Double,
+    format: AVAudioFormat,
+    preset: OceanPreset
+  ) -> AVAudioPCMBuffer? {
     let loopFrameCount = max(1, Int(sampleRate * natureLoopDurationSec(for: preset)))
     let seamFrames = max(1, min(loopFrameCount / 4, Int(sampleRate * Config.natureSeamBlendSec)))
     let renderFrameCount = loopFrameCount + seamFrames
@@ -1388,8 +1551,8 @@ final class AudioCuePlayer {
     var lowpass = OnePoleLowpass(sampleRate: sampleRate, cutoffHz: 1400)
     var surfBand = BiquadBandpass(sampleRate: sampleRate, centerHz: preset.surfCenterHz, q: preset.surfQ)
     let warmupFrames = max(0, Int(sampleRate * Config.natureRenderWarmupSec))
-    let rainWeight = Config.enableNatureRain ? 0.35 : 0.0
-    let oceanWeight = Config.enableNatureOcean ? 0.65 : 0.0
+    let rainWeight = 0.0
+    let oceanWeight = 0.65
     let totalWeight = max(0.0001, rainWeight + oceanWeight)
     var rawSamples = [Double](repeating: 0, count: renderFrameCount)
 
