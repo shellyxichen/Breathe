@@ -86,6 +86,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "Just Breathe"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
